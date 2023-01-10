@@ -60,7 +60,10 @@ else if (isNaN(pilot) === false || isNaN(copilot)  === false || isNaN(Number((fu
    document.getElementById("errorCode").style.visibility= "visible"
    console.log("hey")
 }
-
+else {
+   document.getElementById("itemStatus").style.visibility= "visible"
+   document.getElementById("errorCode").style.visibility= "hidden"
+}
      //validate that all inputs have data in them
 
      //check fuel level and cargo mass, and report launch status

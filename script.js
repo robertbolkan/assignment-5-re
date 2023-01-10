@@ -43,29 +43,49 @@ window.addEventListener("load", function () {
      console.log(isNaN(fuelLevel))
      console.log(isNaN(cargoLevel))
 
+     let readyToLaunch = false;
      // Alongside selecting all of the inputs from the form, we also want to select the faultyItems div
      // and pass into the formSubmission function
      // let list = document.getElementById("faultyItems");
-
+     
+     //validate that all inputs have data in them
 if (pilot === "" || copilot === "" || fuelLevel==="" || cargoLevel==="" ||fuelLevel===0 || cargoLevel===0){
    document.getElementById("errorCode").innerText = "Please fill every entry."
    document.getElementById("errorCode").style.visibility= "visible"
-
+   readyToLaunch = false;
   
 } 
 
 else if (isNaN(pilot) === false || isNaN(copilot)  === false || isNaN(Number((fuelLevel))) === true || isNaN(Number((cargoLevel))) === true ){
    
-   document.getElementById("errorCode").innerText = "Please enter correct data type."
-   document.getElementById("errorCode").style.visibility= "visible"
-   console.log("hey")
+   document.getElementById("errorCode").innerText = "Please enter correct data type.";
+   document.getElementById("errorCode").style.visibility= "visible";
+   readyToLaunch = false;
 }
 else {
-   document.getElementById("itemStatus").style.visibility= "visible"
-   document.getElementById("errorCode").style.visibility= "hidden"
+   document.getElementById("itemStatus").style.visibility= "visible";
+   document.getElementById("errorCode").style.visibility= "hidden";
+   readyToLaunch= true
 }
-     //validate that all inputs have data in them
+if (fuelLevel< 10000){
+   document.getElementById("fuelStatus").innerText= "Not enough fuel for journey";
+   document.getElementById("launchStatus").style.color= "red";
+   document.getElementById("launchStatus").innerText= "Shuttle not ready for launch";
+   readyToLaunch = false;
+}
 
+if (cargoLevel> 10000){
+   document.getElementById("cargoStatus").innerText= "Too much mass for the shuttle to take off for journey";
+   document.getElementById("launchStatus").style.color= "red";
+   document.getElementById("launchStatus").innerText= "Shuttle not ready for launch";
+   readyToLaunch = false;
+
+} else if (readyToLaunch=== true) {
+   document.getElementById("launchStatus").style.color= "green";
+   document.getElementById("launchStatus").innerText= "Shuttle ready for launch";
+   document.getElementById("cargoStatus").innerText= "Cargo check: Passed";
+   document.getElementById("fuelStatus").innerText= "Fuel check: Passed";
+}
      //check fuel level and cargo mass, and report launch status
 
    //   formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel);

@@ -12,7 +12,43 @@
 <img src="${}">
 */
 
+fetch('https://handlers.education.launchcode.org/static/planets.json')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+
+    let randomNumber = Math.floor(Math.random() * 6);
+const planetName = data[randomNumber].name
+const planetDiameter = data[randomNumber].diameter
+const planetStar = data[randomNumber].star
+const planetDistance = data[randomNumber].distance
+const planetMoons = data[randomNumber].moons
+const planetImage = data[randomNumber].image
+
+document.getElementById("name").innerText = `Name: ${planetName}.`
+document.getElementById("diameter").innerText = `Diameter: ${planetDiameter}.`
+document.getElementById("star").innerText = `Star: ${planetStar}.`
+document.getElementById("distance").innerText = `Distance: ${planetDistance}.`
+document.getElementById("moons").innerText = `Number of moons: ${planetMoons}.`
+document.getElementById("image").src = planetImage
+
+  })
+  .catch(error => console.error(error));
+  
+// let randomNumber = Math.floor(Math.random() * 6);
+// let planetName = data[randomNumber].name
+// let planetDiameter = data[randomNumber].diameter
+// let planetStar = data[randomNumber].star
+// let planetDistance = data[randomNumber].planetDistance
+// let planetMoons = data[randomNumber].moons
+// let planetImage = data[randomNumber].image
+
+// console.log(planetDiameter)
+
 //set up a window load handler
+
+
+
 window.addEventListener("load", function () {
 
   // set up a submit handler for the form.
@@ -33,25 +69,16 @@ window.addEventListener("load", function () {
      let cargoInput = document.querySelector("input[name=cargoMass]");
      let cargoLevel = Number(cargoInput.value);
 
-
-     console.log(typeof pilot)
-     console.log(typeof copilot)
-     console.log(typeof cargoLevel)
-     console.log(typeof fuelLevel)
-     console.log(isNaN(pilot))
-     console.log(isNaN(copilot))
-     console.log(isNaN(fuelLevel))
-     console.log(isNaN(cargoLevel))
-
      let readyToLaunch = false;
      // Alongside selecting all of the inputs from the form, we also want to select the faultyItems div
      // and pass into the formSubmission function
-     // let list = document.getElementById("faultyItems");
+ 
      
      //validate that all inputs have data in them
 if (pilot === "" || copilot === "" || fuelLevel==="" || cargoLevel==="" ||fuelLevel===0 || cargoLevel===0){
    document.getElementById("errorCode").innerText = "Please fill every entry."
    document.getElementById("errorCode").style.visibility= "visible"
+   document.getElementById("launchStatus").style.color= "red";
    readyToLaunch = false;
   
 } 
@@ -60,6 +87,7 @@ else if (isNaN(pilot) === false || isNaN(copilot)  === false || isNaN(Number((fu
    
    document.getElementById("errorCode").innerText = "Please enter correct data type.";
    document.getElementById("errorCode").style.visibility= "visible";
+   document.getElementById("launchStatus").style.color= "red";
    readyToLaunch = false;
 }
 else {
@@ -85,10 +113,10 @@ if (cargoLevel> 10000){
    document.getElementById("launchStatus").innerText= "Shuttle ready for launch";
    document.getElementById("cargoStatus").innerText= "Cargo check: Passed";
    document.getElementById("fuelStatus").innerText= "Fuel check: Passed";
+   document.getElementById("pilotStatus").innerText= `Pilot ${pilot} Ready`;
+   document.getElementById("copilotStatus").innerText= `Copilot ${copilot} Ready`;
 }
-     //check fuel level and cargo mass, and report launch status
 
-   //   formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel);
   })
 
 });

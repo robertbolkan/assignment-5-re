@@ -1,51 +1,34 @@
-// Write your JavaScript code here!
 
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ul>
-   <li>Name: ${}</li>
-   <li>Diameter: ${}</li>
-   <li>Star: ${}</li>
-   <li>Distance from Earth: ${}</li>
-   <li>Number of Moons: ${}</li>
-</ul>
-<img src="${}">
-*/
+
 
 fetch('https://handlers.education.launchcode.org/static/planets.json')
   .then(response => response.json())
   .then(data => {
-    console.log(data);
+    
 
     let randomNumber = Math.floor(Math.random() * 6);
-const planetName = data[randomNumber].name
-const planetDiameter = data[randomNumber].diameter
-const planetStar = data[randomNumber].star
-const planetDistance = data[randomNumber].distance
-const planetMoons = data[randomNumber].moons
-const planetImage = data[randomNumber].image
+    const planetName = data[randomNumber].name
+    const planetDiameter = data[randomNumber].diameter
+    const planetStar = data[randomNumber].star
+    const planetDistance = data[randomNumber].distance
+    const planetMoons = data[randomNumber].moons
+    const planetImage = data[randomNumber].image
+    
+    document.getElementById("name").innerText = `Name: ${planetName}.`
+    document.getElementById("diameter").innerText = `Diameter: ${planetDiameter}.`
+    document.getElementById("star").innerText = `Star: ${planetStar}.`
+    document.getElementById("distance").innerText = `Distance: ${planetDistance}.`
+    document.getElementById("moons").innerText = `Number of moons: ${planetMoons}.`
+    document.getElementById("image").src = planetImage
+    
+   })
+   .catch(error => console.error(error));
+   
+   
 
-document.getElementById("name").innerText = `Name: ${planetName}.`
-document.getElementById("diameter").innerText = `Diameter: ${planetDiameter}.`
-document.getElementById("star").innerText = `Star: ${planetStar}.`
-document.getElementById("distance").innerText = `Distance: ${planetDistance}.`
-document.getElementById("moons").innerText = `Number of moons: ${planetMoons}.`
-document.getElementById("image").src = planetImage
-
-  })
-  .catch(error => console.error(error));
-  
-// let randomNumber = Math.floor(Math.random() * 6);
-// let planetName = data[randomNumber].name
-// let planetDiameter = data[randomNumber].diameter
-// let planetStar = data[randomNumber].star
-// let planetDistance = data[randomNumber].planetDistance
-// let planetMoons = data[randomNumber].moons
-// let planetImage = data[randomNumber].image
-
-// console.log(planetDiameter)
-
+   
 //set up a window load handler
+
 
 
 
@@ -54,7 +37,7 @@ window.addEventListener("load", function () {
   // set up a submit handler for the form.
   let form = document.querySelector("form");
   form.addEventListener("submit", function(event) {
-   console.log("test1 prevented default")
+
    event.preventDefault();
      // cancel submission using event.preventDefault()
      let pilotInput = document.querySelector("input[name=pilotName]");
@@ -120,3 +103,4 @@ if (cargoLevel> 10000){
   })
 
 });
+
